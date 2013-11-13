@@ -16,17 +16,15 @@ import com.telefonica.euro_iaas.commons.properties.PropertiesProviderRuntimeExce
 
 /**
  * Implementation of the PropertiesUtilFactory interface.
- *
+ * 
  * @author Sergio Arroyo
- *
  */
 public class PropertiesProviderFactoryImpl implements PropertiesProviderFactory {
 
     /**
      * {@inheritDoc}
      */
-    public PropertiesProvider createPropertiesProvider(EntityManager em)
-            throws PropertiesProviderRuntimeException {
+    public PropertiesProvider createPropertiesProvider(EntityManager em) throws PropertiesProviderRuntimeException {
         return new PropertiesProviderImpl(new PropertiesDAOJPAImpl(em));
     }
 

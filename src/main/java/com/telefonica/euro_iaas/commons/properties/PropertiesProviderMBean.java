@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
 import javax.management.Attribute;
 import javax.management.AttributeList;
 import javax.management.AttributeNotFoundException;
@@ -25,7 +24,7 @@ import javax.management.ReflectionException;
 
 /**
  * Utility MBean that exposes a PropertiesUtil through JMX.
- *
+ * 
  * @author Sergio Arroyo
  */
 public class PropertiesProviderMBean implements DynamicMBean {
@@ -36,13 +35,15 @@ public class PropertiesProviderMBean implements DynamicMBean {
 
     /**
      * Constructor of the class.
-     *
-     * @param namespace The namespace
-     * @param propUtil The PropertiesUtil to expose through JMX
-     * @param classForLoading Reference class for class loading
+     * 
+     * @param namespace
+     *            The namespace
+     * @param propUtil
+     *            The PropertiesUtil to expose through JMX
+     * @param classForLoading
+     *            Reference class for class loading
      */
-    public PropertiesProviderMBean(final String namespace,
-            final PropertiesProvider propUtil) {
+    public PropertiesProviderMBean(final String namespace, final PropertiesProvider propUtil) {
         this.namespace = namespace;
         this.properties = propUtil.load(namespace);
         this.propUtil = propUtil;
@@ -51,8 +52,7 @@ public class PropertiesProviderMBean implements DynamicMBean {
     /**
      * @see javax.management.DynamicMBean#getAttribute(java.lang.String)
      */
-    public synchronized String getAttribute(String name)
-            throws AttributeNotFoundException {
+    public synchronized String getAttribute(String name) throws AttributeNotFoundException {
         String value = properties.getProperty(name);
         if (value != null) {
             return value;
@@ -64,8 +64,7 @@ public class PropertiesProviderMBean implements DynamicMBean {
     /**
      * @see DynamicMBean#setAttribute(javax.management.Attribute)
      */
-    public synchronized void setAttribute(Attribute attribute)
-            throws InvalidAttributeValueException, MBeanException,
+    public synchronized void setAttribute(Attribute attribute) throws InvalidAttributeValueException, MBeanException,
             AttributeNotFoundException {
         String name = attribute.getName();
         if (properties.getProperty(name) == null) {
@@ -73,8 +72,7 @@ public class PropertiesProviderMBean implements DynamicMBean {
         }
         Object value = attribute.getValue();
         if (!(value instanceof String)) {
-            throw new InvalidAttributeValueException(
-                    "Attribute value not a string: " + value);
+            throw new InvalidAttributeValueException("Attribute value not a string: " + value);
         }
 
         // Store the current property value. It is needed if there is a
@@ -118,8 +116,7 @@ public class PropertiesProviderMBean implements DynamicMBean {
         for (Attribute attr : attrs) {
             String name = attr.getName();
             Object value = attr.getValue();
-            if (properties.getProperty(name) != null
-                    && value instanceof String) {
+            if (properties.getProperty(name) != null && value instanceof String) {
                 properties.setProperty(name, (String) value);
                 retlist.add(new Attribute(name, value));
             }
@@ -132,11 +129,8 @@ public class PropertiesProviderMBean implements DynamicMBean {
     /**
      * @see javax.management.DynamicMBean#invoke(java.lang.String, java.lang.Object[], java.lang.String[])
      */
-    public Object invoke(String name, Object[] args, String[] sig)
-            throws MBeanException, ReflectionException {
-        if (name.equals("reload") &&
-                (args == null || args.length == 0) &&
-                (sig == null || sig.length == 0)) {
+    public Object invoke(String name, Object[] args, String[] sig) throws MBeanException, ReflectionException {
+        if (name.equals("reload") && (args == null || args.length == 0) && (sig == null || sig.length == 0)) {
             load();
             return null;
         }
@@ -154,29 +148,15 @@ public class PropertiesProviderMBean implements DynamicMBean {
         Iterator<String> it = names.iterator();
         for (int i = 0; i < attrs.length; i++) {
             String name = it.next();
-            attrs[i] = new MBeanAttributeInfo(
-                    name,
-                    "java.lang.String",
-                    "Property " + name,
-                    true,   // isReadable
+            attrs[i] = new MBeanAttributeInfo(name, "java.lang.String", "Property " + name, true,   // isReadable
                     true,   // isWritable
                     false); // isIs
         }
-        MBeanOperationInfo[] opers = {
-            new MBeanOperationInfo(
-                    "reload",
-                    "Reload properties from file",
-                    null,   // no parameters
-                    "void",
-                    MBeanOperationInfo.ACTION)
-        };
-        return new MBeanInfo(
-                this.getClass().getName(),
-                "Property Manager MBean",
-                attrs,
-                null,  // constructors
-                opers,
-                null); // notifications
+        MBeanOperationInfo[] opers = { new MBeanOperationInfo("reload", "Reload properties from file", null,   // no
+                                                                                                             // parameters
+                "void", MBeanOperationInfo.ACTION) };
+        return new MBeanInfo(this.getClass().getName(), "Property Manager MBean", attrs, null,  // constructors
+                opers, null); // notifications
     }
 
     /**
@@ -188,8 +168,9 @@ public class PropertiesProviderMBean implements DynamicMBean {
 
     /**
      * Stores a properties util.
-     *
-     * @throws InvalidPropertyValueException If there is a validation problem
+     * 
+     * @throws InvalidPropertyValueException
+     *             If there is a validation problem
      */
     private void save() {
         propUtil.store(properties, namespace);

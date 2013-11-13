@@ -10,13 +10,10 @@ package com.telefonica.euro_iaas.commons.properties.impl;
 import java.util.Properties;
 
 import junit.framework.TestCase;
-
 import org.easymock.EasyMock;
 
 /**
- *
  * @author david
- *
  */
 public class PropertiesProviderImplTest extends TestCase {
 

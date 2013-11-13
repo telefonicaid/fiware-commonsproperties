@@ -15,11 +15,11 @@ import javax.persistence.Table;
 
 /**
  * A propeties entry to be stored.
- *
+ * 
  * @author Sergio Arroyo
  */
 @Entity
-@Table(name="configuration_properties")
+@Table(name = "configuration_properties")
 @IdClass(PersistentPropertyPK.class)
 public class PersistentProperty {
 
@@ -41,7 +41,8 @@ public class PersistentProperty {
     }
 
     /**
-     * @param key the key to set
+     * @param key
+     *            the key to set
      */
     public void setKey(final String key) {
         this.key = key;
@@ -55,7 +56,8 @@ public class PersistentProperty {
     }
 
     /**
-     * @param namespace the namespace to set
+     * @param namespace
+     *            the namespace to set
      */
     public void setNamespace(final String namespace) {
         this.namespace = namespace;
@@ -69,7 +71,8 @@ public class PersistentProperty {
     }
 
     /**
-     * @param value the value to set
+     * @param value
+     *            the value to set
      */
     public void setValue(final String value) {
         this.value = value;
