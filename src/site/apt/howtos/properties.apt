@@ -1,0 +1,48 @@
+PROPERTIES PROVIDER
+
+  Using persistent properties is quite simple. All you have to do is use
+  {{{../apidocs/com/telefonica/euro_iaas/commons/properties/PropertiesProvider.html}PropertiesProvider}}
+  class to load the properties of the desired namespace:
+
+---
+
+  PropertiesUtilFactory propertiesFactory = new PropertiesUtilFactoryImpl();
+  PropertiesUtil propertiesUtil = propertiesFactory.createPropertiesUtil(entityManager);
+
+  // classLoaderReference is a class located in the same jar as your properties
+  // file
+  Properties myProperties =
+          propertiesProvider.load(namespace);
+
+---
+
+  Notice that load method returns a standard Properties object. You can
+  modify this property object and store the new values in the database:
+
+---
+
+  myProperties.setProperty(key, value);
+
+  propertiesProvider.store(myProperties, namespace);
+
+---
+
+* HOW TO BUILD DE PROPERTIES PROVIDER
+
+  Commons-Properties provides a
+  {{{../apidocs/com/telefonica/euro_iaas/commons/properties/PropertiesProviderFactory.html}factory}}
+  to create the properties provider (using an entityManager for non-transactional requirements or
+  entityManagerFactory if you need transactions), however, you can use that with Spring copying
+  the code bellow:
+
++-------
+  <bean id="propertiesDAO"
+          class="com.telefonica.euro_iaas.commons.properties.impl.PropertiesDAOJPAImpl">
+    <constructor-arg index="0" ref="entityManager" />
+  </bean>
+
+  <bean id="propertiesProvider"
+          class="com.telefonica.euro_iaas.commons.properties.impl.PropertiesProviderImpl">
+    <constructor-arg index="0" ref="propertiesDAO" />
+  </bean>
++-------

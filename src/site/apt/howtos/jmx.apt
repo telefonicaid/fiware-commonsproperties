@@ -1,0 +1,22 @@
+
+How to expose persistent properties through JMX
+
+* PropertiesUtil
+
+ Properties can be easily be exposed through JMX by using the
+ {{{../apidocs/com/telefonica/euro_iaas/commons/properties/PropertiesUtilMBean.html}PropertiesUtilMBean}}:
+
+---
+
+  // Obtain a Properties Util...
+  PropertiesProvider propertiesProvider = ...
+
+
+  // ... configure the MBean ...
+  PropertiesProviderMBean mbean = new PropertiesProviderMBean(
+    namespace, propertiesProvider);
+
+  // ... and register it to the MBean
+  MBeanUtils.register(mbean, MBEAN_NAME);
+
+---

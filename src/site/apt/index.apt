@@ -1,0 +1,47 @@
+Commons Properties
+
+ Welcome to Commons-Properties project, a library that provides persistent
+ properties. Properties defaults are initially stored in a properties file.
+ When the user makes any modification to those default values, the properties
+ and their values are persisted in the database. For that moment on, the values
+ are always retrieved from database.
+
+ Properties values are stored in namespaces, that are just groups of properties
+ with something in common (system configuration, e-mail configuration, etc.).
+ For example namespace
+ </system-configuration.properties>
+ stores system configuration related properties of proyect <MyProyect>.
+
+ The way to do this is getting all values from data base, and all from a properties
+ file with the same name of the selected namespace. Then propertiesProvider will
+ merge the result being more important the data base values than from the file.
+
+* How To
+
+ In this section you'll find many code snipplets that will explain how to
+ use the PropertiesProvider.
+
+  *  {{{howtos/properties.html}How to use persistent properties}}
+
+  *  {{{howtos/jmx.html}How to expose persistent properties through JMX}}
+
+* Database
+
+ If you are using JPA or Hibernate ORMs, you can add the
+ <com.telefonica.euro_iaas.commons.properties.PersistentProperties> class to your
+ <hibernate.cfg.xml> or <persistence.xml> in order to automatically create the
+ tables at deployment time.
+
+
+* Installation
+
+  If you are using maven in your project, you simply add this dependency to your
+  pom.xml
+
+---
+        <dependency>
+            <groupId>com.telefonica.euro_iaas</groupId>
+            <artifactId>commons-properties</artifactId>
+            <version>${commons-properties-version}</version>
+        </dependency>
+---

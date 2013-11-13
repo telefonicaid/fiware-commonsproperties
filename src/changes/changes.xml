@@ -1,0 +1,12 @@
+<document>
+    <properties>
+        <title>AFC Properties</title>
+    </properties>
+    <body>
+        <release version="1.0.0" date="2011-05-19" description="Add">
+            <action dev="sergio" type="add">
+                Initial version adding the main functionality, the 
+            </action>
+        </release>
+    </body>
+</document>
