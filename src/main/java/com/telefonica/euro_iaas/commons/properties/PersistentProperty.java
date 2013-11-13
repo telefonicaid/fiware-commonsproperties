@@ -1,3 +1,10 @@
+/**
+ * (c) Copyright 2013 Telefonica, I+D. Printed in Spain (Europe). All Rights Reserved.<br>
+ * The copyright to the software program(s) is property of Telefonica I+D. The program(s) may be used and or copied only
+ * with the express written consent of Telefonica I+D or in accordance with the terms and conditions stipulated in the
+ * agreement/contract under which the program(s) have been supplied.
+ */
+
 package com.telefonica.euro_iaas.commons.properties;
 
 import javax.persistence.Column;
@@ -8,11 +15,11 @@ import javax.persistence.Table;
 
 /**
  * A propeties entry to be stored.
- *
+ * 
  * @author Sergio Arroyo
  */
 @Entity
-@Table(name="configuration_properties")
+@Table(name = "configuration_properties")
 @IdClass(PersistentPropertyPK.class)
 public class PersistentProperty {
 
@@ -34,7 +41,8 @@ public class PersistentProperty {
     }
 
     /**
-     * @param key the key to set
+     * @param key
+     *            the key to set
      */
     public void setKey(final String key) {
         this.key = key;
@@ -48,7 +56,8 @@ public class PersistentProperty {
     }
 
     /**
-     * @param namespace the namespace to set
+     * @param namespace
+     *            the namespace to set
      */
     public void setNamespace(final String namespace) {
         this.namespace = namespace;
@@ -62,7 +71,8 @@ public class PersistentProperty {
     }
 
     /**
-     * @param value the value to set
+     * @param value
+     *            the value to set
      */
     public void setValue(final String value) {
         this.value = value;

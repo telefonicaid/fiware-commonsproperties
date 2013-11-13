@@ -1,9 +1,15 @@
+/**
+ * (c) Copyright 2013 Telefonica, I+D. Printed in Spain (Europe). All Rights Reserved.<br>
+ * The copyright to the software program(s) is property of Telefonica I+D. The program(s) may be used and or copied only
+ * with the express written consent of Telefonica I+D or in accordance with the terms and conditions stipulated in the
+ * agreement/contract under which the program(s) have been supplied.
+ */
+
 package com.telefonica.euro_iaas.commons.properties.impl;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -12,18 +18,16 @@ import com.telefonica.euro_iaas.commons.properties.PersistentProperty;
 
 /**
  * JPA DAO implementation of PropertiesDAO.
- *
+ * 
  * @author Sergio Arroyo
  */
 public class PropertiesDAOJPAImpl implements PropertiesDAO {
 
     private static final String NAMESPACE = "namespace";
 
-    private static final String FIND_BY_NAMESPACE =
-        "select p from PersistentProperty p where p.namespace = :namespace";
+    private static final String FIND_BY_NAMESPACE = "select p from PersistentProperty p where p.namespace = :namespace";
 
-    private static final String FIND_NAMESPACES =
-        "select distinct(namespace) from PersistentProperty";
+    private static final String FIND_NAMESPACES = "select distinct(namespace) from PersistentProperty";
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -36,12 +40,14 @@ public class PropertiesDAOJPAImpl implements PropertiesDAO {
     /**
      * Default constructor of the class.
      */
-    public PropertiesDAOJPAImpl() {}
+    public PropertiesDAOJPAImpl() {
+    }
 
     /**
      * Constructor of the class.
-     *
-     * @param entityManager The entity manager to use
+     * 
+     * @param entityManager
+     *            The entity manager to use
      */
     public PropertiesDAOJPAImpl(EntityManager entityManager) {
         this.entityManager = entityManager;

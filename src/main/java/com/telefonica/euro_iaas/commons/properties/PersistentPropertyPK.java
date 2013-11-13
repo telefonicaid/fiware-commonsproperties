@@ -1,7 +1,13 @@
+/**
+ * (c) Copyright 2013 Telefonica, I+D. Printed in Spain (Europe). All Rights Reserved.<br>
+ * The copyright to the software program(s) is property of Telefonica I+D. The program(s) may be used and or copied only
+ * with the express written consent of Telefonica I+D or in accordance with the terms and conditions stipulated in the
+ * agreement/contract under which the program(s) have been supplied.
+ */
+
 package com.telefonica.euro_iaas.commons.properties;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 
 /**
@@ -23,7 +29,8 @@ public class PersistentPropertyPK implements Serializable {
     }
 
     /**
-     * @param key the key to set
+     * @param key
+     *            the key to set
      */
     public void setKey(String key) {
         this.key = key;
@@ -37,13 +44,15 @@ public class PersistentPropertyPK implements Serializable {
     }
 
     /**
-     * @param namespace the namespace to set
+     * @param namespace
+     *            the namespace to set
      */
     public void setNamespace(String namespace) {
         this.namespace = namespace;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see java.lang.Object#hashCode()
      */
     @Override
@@ -51,12 +60,12 @@ public class PersistentPropertyPK implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((key == null) ? 0 : key.hashCode());
-        result = prime * result
-                + ((namespace == null) ? 0 : namespace.hashCode());
+        result = prime * result + ((namespace == null) ? 0 : namespace.hashCode());
         return result;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
