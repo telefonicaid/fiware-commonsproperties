@@ -59,7 +59,7 @@ public class PropertiesProviderImpl implements PropertiesProvider {
      */
     protected Properties loadFromFilesystem(final String namespace,
             final Object referenceClassLoader) {
-        Properties prop = new Properties();
+        Properties prop = new Properties();        
         try {
             InputStream is = referenceClassLoader.getClass()
                     .getResourceAsStream(namespace);
