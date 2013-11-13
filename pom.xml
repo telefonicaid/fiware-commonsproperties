@@ -3,7 +3,7 @@
 
     <groupId>com.telefonica.euro_iaas</groupId>
     <artifactId>commons-properties</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <name>Commos Properties</name>
@@ -109,6 +109,6 @@
         </site>
     </distributionManagement>
     <scm>
-        <developerConnection>scm:svn:https://barricada.hi.inet/repositorio/boi/europ-iaas/util/commons-properties/tags/commons-properties-1.0.0</developerConnection>
+        <developerConnection>scm:svn:https://barricada.hi.inet/repositorio/boi/europ-iaas/util/commons-properties/tags/commons-properties-1.1.0</developerConnection>
     </scm>
 </project>
