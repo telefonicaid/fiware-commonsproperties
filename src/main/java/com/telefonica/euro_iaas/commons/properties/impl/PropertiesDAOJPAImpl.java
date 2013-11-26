@@ -10,9 +10,13 @@ package com.telefonica.euro_iaas.commons.properties.impl;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.telefonica.euro_iaas.commons.properties.PersistentProperty;
 
@@ -21,6 +25,8 @@ import com.telefonica.euro_iaas.commons.properties.PersistentProperty;
  * 
  * @author Sergio Arroyo
  */
+
+@Transactional(propagation = Propagation.REQUIRED)
 public class PropertiesDAOJPAImpl implements PropertiesDAO {
 
     private static final String NAMESPACE = "namespace";
