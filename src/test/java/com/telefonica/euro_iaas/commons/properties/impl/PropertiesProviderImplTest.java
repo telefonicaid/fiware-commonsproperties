@@ -7,16 +7,20 @@
 
 package com.telefonica.euro_iaas.commons.properties.impl;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+
 import java.util.Properties;
 
-import junit.framework.TestCase;
 import org.easymock.EasyMock;
+import org.junit.Test;
 
 /**
  * @author david
  */
-public class PropertiesProviderImplTest extends TestCase {
+public class PropertiesProviderImplTest {
 
+    @Test
     public void testNonExistingDefaultProperties() throws Exception {
 
         String ns = "/non/existing/namespace.properties";
@@ -46,6 +50,7 @@ public class PropertiesProviderImplTest extends TestCase {
         EasyMock.verify(dao);
     }
 
+    @Test
     public void testWithDefaultProperties() throws Exception {
         String ns = "/com/almiralabs/afc/properties/sample.properties";
 
