@@ -11,13 +11,13 @@
         <href>http://www.tid.es</href>
     </bannerRight>
 
-  <body>
+    <body>
 
-    <menu name="Documentation">
-      <item name="Index" href="index.html"/>
-    </menu>
+        <menu name="Documentation">
+            <item name="Index" href="index.html"/>
+        </menu>
 
-    ${reports}
+        ${reports}
 
-  </body>
+    </body>
 </project>
