@@ -2,7 +2,7 @@ language: java
 jdk:
 - openjdk6
 before_install:
-- python travis.py;
+- python travis.py --mirrors;
 install:
 - mvn install -DskipTests=true
 env:
