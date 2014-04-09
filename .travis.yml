@@ -8,7 +8,7 @@ install:
 env:
   global:
   - SONATYPE_USERNAME=deployment
-  - secure: Z8NvfY1YnxoWHXjcBu8VjJkudZyZPNr1hNlMfJddWd9A2P8tdOfHBH21Zn9/aVFGq+kbtKnHNxPdhxA8NfE97FxWmzO/nmVPoJGzoicJK+BMdDNu0sWqdHBhon/MufPUtY3a3fV+5Zn38j8zqI6mWvRIe1GGgmyclih1j7CgjZk=
+  - secure: Jj+p5gZLtuvzWoAC3HWYPESFFjletKwPS9Xoo5+ADb0IlB6hcs6smj2hddC/AUqkQ/2i4rgTOUUouX0LM9nWyNkhJ3AgIBPdnC1pbI08X1J8TxP02FD/qmqPtLBFpIQJLHrF5OftfGPqkbGehQ9NUa4LmZoLj9eFfQX59gj6V6E=
 after_success:
 - '[[ $TRAVIS_REPO_SLUG == telefonicaid* ]] && [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]] && { python travis.py --deploy; mvn deploy -DskipTests=true; };'
 - '[[ $TRAVIS_REPO_SLUG == telefonicaid* ]] && [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "develop" ]] && { python travis.py --deploy; mvn deploy -DskipTests=true; };'

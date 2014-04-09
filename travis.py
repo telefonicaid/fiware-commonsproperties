@@ -65,12 +65,13 @@ class Config():
         mirror.appendChild(mirror_mirrorOf)
         mirror.appendChild(mirror_url)
 
-    def configure_server(self, server=True, home_dir=os.path.expanduser("~")):
+    def configure_server(self, server=True, mirrors=True, home_dir=os.path.expanduser("~")):
 
         m2 = xml.dom.minidom.parse(home_dir + '/.m2/settings.xml')
         settings = m2.getElementsByTagName("settings")[0]
 
-        self.__add_mirror(m2, settings)
+        if mirrors:
+            self.__add_mirror(m2, settings)
         if server:
             self.__add_server(m2, settings, "repo-release")
             self.__add_server(m2, settings, "repo-snapshot")
@@ -81,13 +82,13 @@ class Config():
         f.close()
 
 
-
 def main(prog_args):
     parser = argparse.ArgumentParser()
     parser.add_argument("--deploy", help="add servers tag to settings.xml", action="store_true")
+    parser.add_argument("--mirrors", help="add mirrors tag to settings.xml", action="store_true")
     args = parser.parse_args()
     config = Config()
-    config.configure_server(args.deploy)
+    config.configure_server(server=args.deploy, mirrors=args.mirrors)
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv))
