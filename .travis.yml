@@ -8,7 +8,7 @@ install:
 env:
   global:
   - SONATYPE_USERNAME=deployment
-  - secure: U+ac3B7/J4lJFH+QkWfIm/qekG6znkavGQUt+EFEX4E79IEk3EWCZ6xjJH0AgAYauknuBnB8C6S7ccdD6F3TkgNWh6r9pPN7ND3ha++RCogxzYrNEwdMvHFATShY2MjBlJkJ3C6ZSM+iqmF3+omBlul727ewWL0rjRqzo0xhMd4=
+  - secure: Z8NvfY1YnxoWHXjcBu8VjJkudZyZPNr1hNlMfJddWd9A2P8tdOfHBH21Zn9/aVFGq+kbtKnHNxPdhxA8NfE97FxWmzO/nmVPoJGzoicJK+BMdDNu0sWqdHBhon/MufPUtY3a3fV+5Zn38j8zqI6mWvRIe1GGgmyclih1j7CgjZk=
 after_success:
 - '[[ $TRAVIS_BRANCH == "master" ]] && { mvn deploy -DskipTests=true; };'
 - '[[ $TRAVIS_BRANCH == "develop" ]] && { mvn deploy -DskipTests=true; };'
