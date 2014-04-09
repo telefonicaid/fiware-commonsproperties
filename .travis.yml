@@ -1,0 +1,14 @@
+language: java
+jdk:
+- openjdk6
+before_install:
+- python travis.py;
+install:
+- mvn install -DskipTests=true
+env:
+  global:
+  - SONATYPE_USERNAME=deployment
+  - secure: QWyQn2dzfADCTVgGTKyUUjB/bSjmDMMPvP+PZOwWesVD4v/mcRfG2rRGIgoCB1SgdYSu7iX7WFXSwtyrPQSut1EsaFdLXODDmboLCrbdlXHqTnEOt/kcFQ2pmz0M8Tiyc3t+fsYqkDscN9EKfH32XkzZBAeceI1kSTpyMErmGuE=
+after_success:
+- '[[ $TRAVIS_BRANCH == "master" ]] && { mvn deploy -DskipTests=true; };'
+- '[[ $TRAVIS_BRANCH == "develop" ]] && { mvn deploy -DskipTests=true; };'
