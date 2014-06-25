@@ -3,7 +3,7 @@
 
     <groupId>com.telefonica.euro_iaas</groupId>
     <artifactId>commons-properties</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <packaging>jar</packaging>
 
     <name>Commons Properties</name>
@@ -17,8 +17,9 @@
         <repoName>fiware-commonsproperties</repoName>
         <scmURI>git@pdihub.hi.inet:fiware</scmURI>
         <ciURI>http://ci-fiware-01.hi.inet</ciURI>
+        <nexusURI>http://130.206.80.169</nexusURI>
         <issueURI>https://jirapdi.tid.es/browse</issueURI>
-        <nexusRepositories>${ciURI}/nexus/content/repositories</nexusRepositories>
+        <nexusRepositories>${nexusURI}/nexus/content/repositories</nexusRepositories>
         <continousIntegrationSystemUrl>${ciURI}/jenkins</continousIntegrationSystemUrl>
         <continousIntegrationSystemProjectName>${repoName}</continousIntegrationSystemProjectName>
 
