@@ -17,7 +17,7 @@
         <repoName>fiware-commonsproperties</repoName>
         <scmURI>git@pdihub.hi.inet:fiware</scmURI>
         <ciURI>http://ci-fiware-01.hi.inet</ciURI>
-        <nexusURI>http://130.206.80.169</nexusURI>
+        <nexusURI>http://130.206.80.85</nexusURI>
         <issueURI>https://jirapdi.tid.es/browse</issueURI>
         <nexusRepositories>${nexusURI}/nexus/content/repositories</nexusRepositories>
         <continousIntegrationSystemUrl>${ciURI}/jenkins</continousIntegrationSystemUrl>
