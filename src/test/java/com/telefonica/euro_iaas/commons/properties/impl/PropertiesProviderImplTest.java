@@ -64,7 +64,6 @@ public class PropertiesProviderImplTest {
         assertEquals(1, prop2.size());
         assertEquals("first value", prop2.getProperty("aKey"));
 
-        EasyMock.verify(dao);
     }
 
     @Test
