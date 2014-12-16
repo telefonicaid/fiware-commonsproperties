@@ -31,6 +31,11 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
+import net.sf.ehcache.config.CacheConfiguration;
+
 import com.telefonica.euro_iaas.commons.properties.PropertiesProvider;
 
 /**
@@ -43,7 +48,11 @@ public class PropertiesProviderImpl implements PropertiesProvider {
 
     private static final Logger LOGGER = Logger.getLogger(PropertiesProviderImpl.class.getName());
 
+    private static final String CACHE_NAME = "properties";
+
     private final PropertiesDAO propertiesDAO;
+
+    private Cache cache;
 
     /**
      * Constructor of the class.
@@ -53,20 +62,51 @@ public class PropertiesProviderImpl implements PropertiesProvider {
      */
     public PropertiesProviderImpl(final PropertiesDAO dao) {
         this.propertiesDAO = dao;
+        configureCache();
+
+    }
+
+    private void configureCache() {
+
+        CacheManager singletonManager;
+        try {
+            InputStream inputStream = this.getClass().getResourceAsStream("/ehcache.xml");
+            singletonManager = CacheManager.newInstance(inputStream);
+        } catch (Exception e) {
+            singletonManager = CacheManager.create();
+            singletonManager.addCache(CACHE_NAME);
+            cache.getCacheConfiguration();
+            cache = singletonManager.getCache(CACHE_NAME);
+            CacheConfiguration cacheConfiguration = cache.getCacheConfiguration();
+            cacheConfiguration.setTimeToIdleSeconds(300);
+            cacheConfiguration.setTimeToLiveSeconds(300);
+            e.printStackTrace();
+
+        }
+        cache = singletonManager.getCache(CACHE_NAME);
+
     }
 
     /**
      * @see PropertiesProvider#load(String)
      */
     public Properties load(final String namespace) {
-        Properties prop = loadFromFilesystem(namespace, this);
-        Properties modifiedProp = propertiesDAO.load(namespace);
-        for (Iterator i = modifiedProp.keySet().iterator(); i.hasNext();) {
-            String key = (String) i.next();
-            String value = modifiedProp.getProperty(key);
-            prop.setProperty(key, value);
+
+        Element propCached = cache.get(namespace);
+        if (propCached == null) {
+
+            Properties prop = loadFromFilesystem(namespace, this);
+            Properties modifiedProp = propertiesDAO.load(namespace);
+            for (Iterator i = modifiedProp.keySet().iterator(); i.hasNext();) {
+                String key = (String) i.next();
+                String value = modifiedProp.getProperty(key);
+                prop.setProperty(key, value);
+            }
+            cache.put(new Element(namespace, prop));
+            return prop;
+        } else {
+            return (Properties) propCached.getValue();
         }
-        return prop;
     }
 
     /**
@@ -98,6 +138,8 @@ public class PropertiesProviderImpl implements PropertiesProvider {
      */
     public void store(final Properties prop, final String namespace) {
         propertiesDAO.store(prop, namespace);
+        cache.put(new Element(namespace, prop));
+
     }
 
     /**
