@@ -26,6 +26,7 @@ package com.telefonica.euro_iaas.commons.properties.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -69,21 +70,34 @@ public class PropertiesProviderImpl implements PropertiesProvider {
     private void configureCache() {
 
         CacheManager singletonManager;
+        InputStream inputStream = this.getClass().getResourceAsStream("/ehcache.xml");
         try {
-            InputStream inputStream = this.getClass().getResourceAsStream("/ehcache.xml");
             singletonManager = CacheManager.newInstance(inputStream);
+            cache = singletonManager.getCache(CACHE_NAME);
+            if (cache == null) {
+                throw new Exception("Cache " + CACHE_NAME + " does not exist in ehcache file. Caches list:"
+                        + Arrays.toString(singletonManager.getCacheNames()));
+            }
         } catch (Exception e) {
+            LOGGER.severe("Error reading ehCache file " + e);
             singletonManager = CacheManager.create();
-            singletonManager.addCache(CACHE_NAME);
-            cache.getCacheConfiguration();
+            if (!singletonManager.cacheExists(CACHE_NAME)) {
+                singletonManager.addCache(CACHE_NAME);
+            }
             cache = singletonManager.getCache(CACHE_NAME);
             CacheConfiguration cacheConfiguration = cache.getCacheConfiguration();
             cacheConfiguration.setTimeToIdleSeconds(300);
             cacheConfiguration.setTimeToLiveSeconds(300);
-            e.printStackTrace();
 
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    LOGGER.severe("Error closing ehCache file " + e);
+                }
+            }
         }
-        cache = singletonManager.getCache(CACHE_NAME);
 
     }
 
